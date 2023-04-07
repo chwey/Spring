@@ -1,5 +1,7 @@
 package com.yedam.board.service;
 
+
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yedam.board.domain.BoardVO;
+import com.yedam.board.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -20,9 +23,17 @@ public class ServiceTest {
 	private BoardService service;
 	
 	@Test
-	public void getListTest() {
-		service.getList().forEach(board -> log.info(board));
+	public void listTest() {
+		Criteria cri = new Criteria(1, 30);
+		cri.setType("TCW");
+		cri.setKeyword("user05");
+//		cri.setPageNum(2);
+		service.getList(cri).forEach(board -> log.info(board));
 	}
+	
+//	public void getListTest() {
+//		service.getList().forEach(board -> log.info(board));
+//	}
 	
 	public void removeTest() {
 		log.info(service.remove(3L));

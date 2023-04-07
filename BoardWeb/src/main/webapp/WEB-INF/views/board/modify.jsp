@@ -4,16 +4,17 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="page-header">Board Read</h1>
+		<h1 class="page-header">Board Modify</h1>
 	</div>
 
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Board Read Page</div>
+				<div class="panel-heading">Board Modify Page</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
-
+				  <form action="/board/modify" method="post">
+				  <input type="hidden" name="pageNum" value="${cri.pageNum }">
 					<div class="form-group">
 						<label>Bno</label> <input class="form-control" type="text"
 							name="bno" value="${board.bno }" readonly>
@@ -31,12 +32,9 @@
 						<textarea class="form-control" name="content">${board.content }</textarea>
 					</div>
 					<button type="submit" data-oper="modify"class="btn btn-default">Modify</button>
+					<button type="submit" data-oper="remove"class="btn btn-default">Remove</button>
 					<button type="submit" data-oper="list"class="btn btn-default">List</button>
-					<form id="operForm" action="/board/modify" method="get">
-						<input type="hidden" id="bno" name="bno" value="${board.bno }">
-						<input type="hidden" name="pageNum" value="${cri.pageNum }">
-						<input type="hidden" name="amount" value="${cri.amount }">
-					</form>
+				  </form>
 				</div>
 				<!-- /.panel-body -->
 			</div>
@@ -46,16 +44,29 @@
 	</div>
 	<!-- /.row -->
 	<script>
-	 $(document).ready(function(){
-		 var operForm = $('#operForm');
-	 $('button[data-oper="modify"]').on('click', function(){
-		 operForm.attr('action', '/board/modify').submit();
-	 })
-	 $('button[data-oper="list"]').on('click', function(){
-		 operForm.find('#bno').remove(); //목록이동일 경우 parameter 필요없음
-		 operForm.attr('action', '/board/list');
-		 operForm.submit();
-	 })
-	 });
+		$(document).ready(function(){
+			var formObj = $('form');
+			
+			$('button').on('click', function(e){
+				e.preventDefault(); //기본기능차단
+				var operation = $(this).data('oper');
+				console.log(operation);
+				
+				if(operation == 'remove'){
+					formObj.attr('action', '/board/remove');
+				} else if(operation == 'list'){
+					//self.location = '/board/list';
+					//return;
+					//pageNum, amount => clone() -> empty() -> append(clone item)
+					var pageNumTag= formObj.find('input[name="pageNum"]').clone();
+					var amountTag= formObj.find('input[name="amount"]').clone();
+					formObj.attr('action', '/board/list').attr('method', 'get')
+					formObj.empty();//목록으로 이동할때 파라미터 값 필요없어서 제거
+					formObj.append(pageNumTag);
+					formObj.append(amountTag);
+				}
+				formObj.submit(); //submit 호출
+			})
+		});
 	</script>
 	<jsp:include page="../includes/footer.jsp"></jsp:include>
