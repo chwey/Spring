@@ -39,7 +39,7 @@ public class SampleController {
 	@RequestMapping("myInfo")
 	public String basic3() {
 		
-		return "sample/myInfo";
+		return "sample/myInfo"; // /WEB-INF/views/sample/myInfo.jsp
 	}
 	
 	@RequestMapping(value="page3", method= {RequestMethod.GET,RequestMethod.POST})
