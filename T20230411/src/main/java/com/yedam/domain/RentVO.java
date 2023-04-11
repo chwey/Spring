@@ -2,6 +2,9 @@ package com.yedam.domain;
 
 import java.util.Date;
 
+import lombok.Data;
+
+@Data
 public class RentVO {
 	private int rentNo;
 	private int bookNo;

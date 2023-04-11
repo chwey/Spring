@@ -65,10 +65,10 @@
             <p>도서 등록</p>
         </div>
         <div>
-          <form role="form" action="/book/register" method="post">
+          <form role="form" action="/register" method="post">
 					<div class="form-group">
 						<label>도서번호</label>
-						<input class="form-control" type="text" name="bookNo">
+						<input class="form-control" type="text" readonly>
 					</div>
 					<div class="form-group">
 						<label>도서명</label>
@@ -80,7 +80,7 @@
 					</div>
 					<div class="form-group">
 						<label>출판일자</label>
-						<input class="form-control" type="text" name="bookDate">
+						<input class="form-control" type="date" name="bookDate">
 					</div>
 					<div class="form-group">
 						<label>금액</label>
@@ -94,7 +94,7 @@
 						<label>도서소개</label>
 						<textarea class="form-control" name="bookInfo"></textarea>
 					</div>
-					<button id = "registerBtn" type="submit" class="btn btn-default">등록</button>
+					<button type="submit" class="btn btn-default">등록</button>
 					<button type="submit" class="btn btn-default">조회</button>
 				</form>			  
         </div>
@@ -105,7 +105,3 @@
 	
 </body>
 </html>
-
-<script>
-	
-</script>
