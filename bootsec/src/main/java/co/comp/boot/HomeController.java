@@ -62,7 +62,7 @@ public class HomeController {
 				(UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		System.out.println(userDetails.getUsername());
 		
-		System.out.println(uservo.getName()); //userid
+		//System.out.println(uservo.getName()); //userid
 		return "user/user";
 	}
 	
